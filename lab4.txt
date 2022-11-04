@@ -1,0 +1,27 @@
+1         
+
+DELETE FROM postac WHERE wiek = 30;
+
+klucze obce usuwanie
+ show create table walizka;
+ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_2;
+
+ALTER TABLE postac DROP COLUMN id_postaci;
+
+2
+ALTER TABLE postac ADD COLUMN pesel CHAR(11);
+
+UPDATE postac SET pesel=11111111111 WHERE nazwa='Bjorn';
+UPDATE postac SET pesel=11111111112 WHERE nazwa='Drozd';
+UPDATE postac SET pesel=11111111113 WHERE nazwa='Tesciowa';
+UPDATE postac SET pesel=11111111114 WHERE nazwa='Maciek';
+UPDATE postac SET pesel=11111111115 WHERE nazwa='Arek';
+
+ ALTER TABLE postac ADD PRIMARY KEY (pesel);
+
+ALTER TABLE postac MODIFY  rodzaj ENUM('ptak','wiking','kobieta','syrena');
+ INSERT INTO postac VALUES('Gertruda Nieszczera','syrena','1669-02-11',15,NULL,NULL,11111111116);
+3
+UPDATE postac SET statek='Wielka Marta' WHERE  nazwa LIKE '%a%';
