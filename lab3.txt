@@ -24,7 +24,7 @@ UPDATE postac SET funkcja = 'kapitan' WHERE nazwa='Bjorn';
  ALTER TABLE postac ADD FOREIGN KEY (statek) references statek(nazwa_statku);
 
 UPDATE postac  SET statek='Wielka Marta' WHERE rodzaj='wiking';
- UPDATE postac  SET statek='Piekna Syrena' WHERE rodzaj='drozd';
+ UPDATE postac  SET statek='Piekna Syrena' WHERE nazwa='drozd';
 
 DELETE FROM izba WHERE nazwa_izby='spizarnia';
 DROP TABLE izba;
