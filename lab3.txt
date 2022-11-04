@@ -1,0 +1,33 @@
+zapytania od 4
+
+4
+CREATE TABLE przetwory (id_przetworu int primary key, rok_produkcji INT(4) DEFAULT '1654', id_wykonawcy int,zawartosc VARCHAR(70),dodatek VARCHAR (70) DEFAULT 'papryczka chile',id_konsumenta INT,foreign key(id_wykonawcy)  references postac(id_postaci), foreign key (id_konsumenta) references postac(id_postaci));
+
+INSERT INTO przetwory VALUES ('1','2008','2','bigos',default,'2');
+
+5
+INSERT INTO postac VALUES (default,'Maciek','wiking','200-08-03',23);
+INSERT INTO postac VALUES (default,'Mateusz','wiking','1999-11-21',30);
+INSERT INTO postac VALUES (default,'Daniel','wiking','1979-11-14',30);
+INSERT INTO postac VALUES (default,'Arek','wiking','2002-09-29',20);
+
+ CREATE TABLE statek (nazwa_statku VARCHAR (50) PRIMARY KEY, rodzaj_statku ENUM('handlowy','szybki','bojowy'), data_wodow
+ania DATE, max_ladownosc INT UNSIGNED);
+
+INSERT INTO statek VALUES ('Wielka Marta','szybki','2022-11-22',700);
+INSERT INTO statek VALUES ('Piekna Syrena','bojowy','1999-12-02',600);
+
+ALTER TABLE postac ADD COLUMN funkcja VARCHAR(40);
+
+UPDATE postac SET funkcja = 'kapitan' WHERE nazwa='Bjorn';
+ ALTER TABLE postac ADD COLUMN statek  VARCHAR(50);
+ ALTER TABLE postac ADD FOREIGN KEY (statek) references statek(nazwa_statku);
+
+UPDATE postac  SET statek='Wielka Marta' WHERE rodzaj='wiking';
+ UPDATE postac  SET statek='Piekna Syrena' WHERE rodzaj='drozd';
+
+DELETE FROM izba WHERE nazwa_izby='spizarnia';
+DROP TABLE izba;
+
+
+
