@@ -24,4 +24,47 @@ UPDATE postac SET pesel=11111111115 WHERE nazwa='Arek';
 ALTER TABLE postac MODIFY  rodzaj ENUM('ptak','wiking','kobieta','syrena');
  INSERT INTO postac VALUES('Gertruda Nieszczera','syrena','1669-02-11',15,NULL,NULL,11111111116);
 3
-UPDATE postac SET statek='Wielka Marta' WHERE  nazwa LIKE '%a%';
+UPDATE postac SET statek='Wielka Marta' WHERE  nazwa LIKE '%a%'
+
+update statek set max_ladownosc = (max_ladownosc *0.70) where data_wodowania  between ('1901-01-01') and ('2000-12-31');
+
+
+SELECT 'nazwa','wiek' ,CASE
+WHEN wiek < 1000 THEN 'ma mniej niz 1000 lat spoko'
+ELSE 'ma wiecej niz 1000 lat nie spoko'
+END
+FROM postac;
+
+
+4
+ALTER TABLE postac MODIFY  rodzaj ENUM('ptak','wiking','kobieta','syrena','waz');
+
+INSERT INTO postac VALUES ('Loko','waz','1000-01-01','1234',null,null,'12345678911');
+
+
+
+CREATE TABLE marynarz (
+  `nazwa` varchar(40) DEFAULT NULL,
+  `rodzaj` enum('ptak','wiking','kobieta','syrena','waz') DEFAULT NULL,
+  `data_ur` date DEFAULT NULL,
+  `wiek` int unsigned DEFAULT NULL,
+  `funkcja` varchar(40) DEFAULT NULL,
+  `statek` varchar(50) DEFAULT NULL,
+  `pesel` char(11) NOT NULL,
+  PRIMARY KEY (`pesel`),
+  KEY `statek` (`statek`),
+  CONSTRAINT `marynarz_ibfk_1` FOREIGN KEY (`statek`) REFERENCES `statek` (`nazwa_statku`)
+) ;
+
+INSERT INTO marynarz SELECT * FROM postac WHERE statek is not null;
+
+5
+UPDATE postac SET statek = NULL ;
+DELETE FROM postac where nazwa= 'Arek';
+
+ALTER TABLe marynarz DROP foreign key marynarz_ibfk_1;
+DELETE FROM statek;
+ALTER TABLe postac DROP foreign key postac_ibfk_1;
+DROP table statek;
+CREATE TABLE zwierz (id int auto_increment primary key,nazwa varchar(100),wiek int);
+INSERT INTO zwierz SELECT null ,nazwa,wiek FROM postac WHERE rodzaj = 'ptak' OR rodzaj = 'waz';
